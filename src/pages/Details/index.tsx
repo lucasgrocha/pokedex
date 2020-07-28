@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../../services/api";
 
 //   - Passos da Evolução // missing in api
 
@@ -29,6 +30,7 @@ const Details = () => {
   const pokemonData = window.history.state.usr;
   const imageURL = pokemonData.sprites.front_default;
   const { height, name, types, stats, id } = pokemonData;
+  const [evolutionURL, setEvolutionUrl] = useState<string>();
 
   let filteredProperties = {} as Property;
   const propertiesObj = stats
@@ -44,9 +46,26 @@ const Details = () => {
     filteredProperties = { ...filteredProperties, ...property };
   }
 
+  findEvolutionUrl();
+
+  useEffect(() => {
+    if (!!evolutionURL) {
+      api.get(evolutionURL).then((response) => {
+        const evolutions = response.data.chain;
+        console.log(evolutions);
+      });
+    }
+  }, [evolutionURL]);
+
+  function findEvolutionUrl() {
+    api.get(`pokemon-species/${id}`).then((response) => {
+      setEvolutionUrl(response.data.evolution_chain.url);
+    });
+  }
+
   return (
     <>
-      <img src={imageURL} alt="Pokemon image" />
+      <img src={imageURL} alt="Pokemon" />
       <p>{name}</p>
       <p>id: {id}</p>
       <p>Height: {height / 10}</p>
