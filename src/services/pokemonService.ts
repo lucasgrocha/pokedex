@@ -1,7 +1,10 @@
 import api from "./api";
 
 const pokemonService = {
-  index: () => api.get("/pokemon", { params: { offset: 0, limit: 10 } }),
+  index: (activePage: number) =>
+    api.get("/pokemon", {
+      params: { offset: (activePage - 1) * 10, limit: 10 },
+    }),
 };
 
 export default pokemonService;

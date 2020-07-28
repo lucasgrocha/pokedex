@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import pokemonService from "../../services/pokemonService";
 import TileItem from "../../components/TileItem";
+import Paginate from "../../components/Paginate";
 
 interface Pokemon {
   name: string;
@@ -10,28 +11,44 @@ interface Pokemon {
 const Home = () => {
   const [nextPage, setNextPage] = useState("");
   const [previousPage, setPreviousPage] = useState("");
-  const [pages, setPages] = useState(0);
+  const [activePage, setActivePage] = useState(1);
+  const [pagesCount, setPagesCount] = useState(0);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-  const retrieveAllPokemon = async () => {
-    const response = await pokemonService.index();
+  const retrievePokemons = async () => {
+    const response = await pokemonService.index(activePage);
     console.log(response.data);
     const { next, results, count, previous } = response["data"];
     setNextPage(next);
     setPokemons(results);
     setPreviousPage(previous);
-    setPages(count / 10); // 10 -> pagination offset
+    setPagesCount(count); // 10 -> pagination offset
   };
 
   useEffect(() => {
-    retrieveAllPokemon();
+    retrievePokemons();
   }, []);
+
+  useEffect(() => {
+    retrievePokemons();
+  }, [activePage]);
+
+  const handlePageChanged = (currentPage: number) => {
+    setActivePage(currentPage);
+  };
+
+  const pokemonList = pokemons.map((pokemon) => (
+    <TileItem key={pokemon.name} name={pokemon.name} url={pokemon.url} />
+  ));
 
   return (
     <>
-      {pokemons.map((pokemon) => (
-        <TileItem key={pokemon.name} name={pokemon.name} url={pokemon.url} />
-      ))}
+      {pokemonList}
+      <Paginate
+        totalItems={pagesCount}
+        activePage={activePage}
+        changed={handlePageChanged}
+      />
     </>
   );
 };
