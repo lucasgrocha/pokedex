@@ -1,22 +1,59 @@
 import React from "react";
 
-// - Nome
-//   - Imagem
-//   - Altura
-//   - Lista de Tipos
-//   - Velocidade
-//   - Defesa
-//   - Ataque
-//   - HP
 //   - Passos da Evolução // missing in api
+
+interface Property {
+  hp: {
+    base_stat: number;
+    effort: number;
+    stat: object;
+  };
+  attack: {
+    base_stat: number;
+    effort: number;
+    stat: object;
+  };
+  defense: {
+    base_stat: number;
+    effort: number;
+    stat: object;
+  };
+  speed: {
+    base_stat: number;
+    effort: number;
+    stat: object;
+  };
+}
 
 const Details = () => {
   const pokemonData = window.history.state.usr;
+  const imageURL = pokemonData.sprites.front_default;
+  const { height, name, types, stats, id } = pokemonData;
 
-  console.log(pokemonData);
+  let filteredProperties = {} as Property;
+  const propertiesObj = stats
+    .filter((stat: any) => {
+      return ["hp", "attack", "defense", "speed"].includes(stat.stat.name);
+    })
+    .map((stat: any) => {
+      const propertyName = stat.stat.name;
+      return { [propertyName]: stat };
+    });
+
+  for (const property of propertiesObj) {
+    filteredProperties = { ...filteredProperties, ...property };
+  }
+
   return (
     <>
-      <p>Details</p>
+      <img src={imageURL} alt="Pokemon image" />
+      <p>{name}</p>
+      <p>id: {id}</p>
+      <p>Height: {height / 10}</p>
+      <p>HP: {filteredProperties.hp.base_stat}</p>
+      <p>Speed: {filteredProperties.speed.base_stat}</p>
+      <p>attack: {filteredProperties.attack.base_stat}</p>
+      <p>defense: {filteredProperties.defense.base_stat}</p>
     </>
   );
 };
