@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import { Table } from "react-bootstrap";
 import pokemonTypesSelector from "../../helpers/pokemonTypesSelector";
 import pokemonService from "../../services/pokemonService";
 import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { DetailBox, PokemonImage } from "./styles";
 
 //   - Passos da Evolução // missing in api
 
@@ -43,7 +45,7 @@ const Details = () => {
   const [evolutionURL, setEvolutionUrl] = useState<string>();
   const [typeNames, setTypeNames] = useState<string[]>();
   const [filteredProperties, setFilteredProperties] = useState<Property>();
-  const [notFound, setNotFound] = useState(false)
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -55,7 +57,7 @@ const Details = () => {
       })
       .catch(() => {
         setLoading(false);
-        setNotFound(true)
+        setNotFound(true);
       });
   }, []);
 
@@ -111,39 +113,67 @@ const Details = () => {
   }, [id]);
 
   const details = (
-    <>
-      <img src={imageURL} alt="Pokemon" />
-      <p>{name}</p>
-      <p>id: {id}</p>
-      <p>Height: {height / 10}</p>
-      {filteredProperties && Object.keys(filteredProperties).length !== 0 && (
-        <>
-          <p>HP: {filteredProperties.hp.base_stat}</p>
-          <p>Speed: {filteredProperties.speed.base_stat}</p>
-          <p>attack: {filteredProperties.attack.base_stat}</p>
-          <p>defense: {filteredProperties.defense.base_stat}</p>
-        </>
+    <DetailBox>
+      {!!id && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <PokemonImage
+            src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
+            alt="Pokemon"
+          />
+        </div>
       )}
-      <p>
-        Types: <strong>{typeNames?.join(" | ")}</strong>
-      </p>
-    </>
+      <h1 className="text-center text-uppercase">{name}</h1>
+      <Table striped bordered hover>
+        <tbody className="text-center">
+          <tr>
+            <td>id</td>
+            <td>{id}</td>
+          </tr>
+          <tr>
+            <td>Height</td>
+            <td>{height / 10}</td>
+          </tr>
+          {filteredProperties && Object.keys(filteredProperties).length !== 0 && (
+            <>
+              <tr>
+                <td>HP</td>
+                <td>{filteredProperties.hp.base_stat}</td>
+              </tr>
+              <tr>
+                <td>Speed</td>
+                <td>{filteredProperties.speed.base_stat}</td>
+              </tr>
+              <tr>
+                <td>Attack</td>
+                <td>{filteredProperties.attack.base_stat}</td>
+              </tr>
+              <tr>
+                <td>Defense</td>
+                <td>{filteredProperties.defense.base_stat}</td>
+              </tr>
+              <tr>
+                <td>Types</td>
+                <td>
+                  <strong>{typeNames?.join(" | ")}</strong>
+                </td>
+              </tr>
+            </>
+          )}
+        </tbody>
+      </Table>
+    </DetailBox>
   );
 
   if (notFound) {
-    return(
+    return (
       <>
         <p>Not found</p>
-        <Link to='/'>Home</Link>
+        <Link to="/">Home</Link>
       </>
-    )
+    );
   }
 
-  return (
-  <>
-    {loading ? <p>Please wait</p> : details}
-  </>
-  );
+  return <>{loading ? <p>Please wait</p> : details}</>;
 };
 
 export default Details;
