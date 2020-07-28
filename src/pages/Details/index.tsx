@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import pokemonTypesSelector from "../../helpers/pokemonTypesSelector";
 
 //   - Passos da Evolução // missing in api
 
@@ -31,6 +32,7 @@ const Details = () => {
   const imageURL = pokemonData.sprites.front_default;
   const { height, name, types, stats, id } = pokemonData;
   const [evolutionURL, setEvolutionUrl] = useState<string>();
+  const [typeNames] = useState(pokemonTypesSelector(types));
 
   let filteredProperties = {} as Property;
   const propertiesObj = stats
@@ -73,6 +75,9 @@ const Details = () => {
       <p>Speed: {filteredProperties.speed.base_stat}</p>
       <p>attack: {filteredProperties.attack.base_stat}</p>
       <p>defense: {filteredProperties.defense.base_stat}</p>
+      <p>
+        Types: <strong>{typeNames.join(" | ")}</strong>
+      </p>
     </>
   );
 };
