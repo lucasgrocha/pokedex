@@ -1,24 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputGroup, Button, FormControl } from "react-bootstrap";
 import pokemonService from "../../services/pokemonService";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pokemonData, setPokemonData] = useState<object>();
 
   const handleUserInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(evt.target.value);
   };
-
-  // - Nome
-  //   - Imagem
-  //   - Altura
-  //   - Lista de Tipos
-  //   - Velocidade
-  //   - Defesa
-  //   - Ataque
-  //   - HP 
-  //   - Passos da Evolução // missing in api
 
   const handleUserClick = () => {
     setLoading(true);
@@ -26,15 +19,19 @@ const Search = () => {
     pokemonService
       .show(searchTerm)
       .then((response) => {
-        const { name, sprites, height, types, stats } = response.data
-        console.log(name, height, types, stats, sprites)
+        setPokemonData(response.data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log("Not found");
+      .catch(() => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (!!pokemonData) {
+      navigate("details", { replace: false, state: { ...pokemonData } });
+    }
+  }, [pokemonData, navigate]);
 
   return (
     <>
