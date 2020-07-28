@@ -44,11 +44,19 @@ const PokemonList = () => {
   return (
     <>
       {pokemonList}
-      <Paginate
-        totalItems={pagesCount}
-        activePage={activePage}
-        changed={handlePageChanged}
-      />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Paginate
+          totalItems={pagesCount}
+          activePage={activePage}
+          changed={handlePageChanged}
+        />
+      </div>
     </>
   );
 };
