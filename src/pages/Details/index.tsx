@@ -2,7 +2,11 @@ import React from 'react'
 
 const Details = () => {
 
-  return null
+  return(
+    <>
+      <p>Details</p>
+    </>
+  )
 }
 
 export default Details
