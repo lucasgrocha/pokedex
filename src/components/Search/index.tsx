@@ -6,7 +6,8 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleUserInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(evt.target.value);
+    const formatted = evt.target.value.toLowerCase()
+    setSearchTerm(formatted);
   };
 
   return (
@@ -14,6 +15,7 @@ const Search = () => {
       <InputGroup className="mb-3">
         <FormControl
           type="text"
+          value={searchTerm}
           placeholder="Pokemon's name or number"
           onChange={handleUserInput}
         />
