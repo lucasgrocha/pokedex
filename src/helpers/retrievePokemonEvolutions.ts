@@ -21,7 +21,7 @@ const retrievePokemonEvolutions = async (evolutionURL: string) => {
     }
 
     evoData = evoData.evolves_to[0];
-  } while (evoData != undefined && evoData.hasOwnProperty("evolves_to"));
+  } while (evoData !== undefined && evoData.hasOwnProperty("evolves_to"));
 
   return evoChain;
 };

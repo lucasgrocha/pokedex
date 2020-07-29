@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Card, StyledName } from "./styles";
-import { Link } from "react-router-dom";
 import { BrokenImage } from "@styled-icons/material-outlined";
 
 interface Props {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CardItem from "../../components/CardItem";
 
 const Favorites = () => {
-  const [favored, setFavored] = useState(
+  const [favored] = useState(
     JSON.parse(localStorage.getItem("favorites_pokemon") || "[]")
   );
 
@@ -17,7 +17,7 @@ const Favorites = () => {
       }}
     >
       {favored.map((pokemon: string) => (
-          <CardItem name={pokemon} />
+          <CardItem key={pokemon} name={pokemon} />
       ))}
     </div>
   );

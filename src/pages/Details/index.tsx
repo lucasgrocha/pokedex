@@ -35,12 +35,10 @@ interface Property {
 const Details = () => {
   const { searchTerm } = useParams();
   const [pokemonData, setPokemonData] = useState<any>();
-  const [imageURL, setImageURL] = useState("");
   const [height, setHeight] = useState(0);
   const [name, setName] = useState("");
   const [id, setId] = useState<number>();
   const [stats, setStats] = useState<object[]>([]);
-  const [types, setTypes] = useState<object[]>();
   const [loading, setLoading] = useState(false);
   const [evolutionURL, setEvolutionUrl] = useState<string>();
   const [typeNames, setTypeNames] = useState<string[]>();
@@ -67,10 +65,8 @@ const Details = () => {
       const { height, name, types, stats, id } = pokemonData;
       setHeight(height);
       setName(name);
-      setTypes(types);
       setStats(stats);
       setId(id);
-      setImageURL(pokemonData.sprites.front_default);
       setTypeNames(pokemonTypesSelector(types));
     }
   }, [pokemonData]);

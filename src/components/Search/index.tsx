@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const navigate = useNavigate();

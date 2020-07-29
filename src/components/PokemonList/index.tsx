@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import pokemonService from "../../services/pokemonService";
 import TileItem from "../CardItem";
 import Paginate from "../Paginate";
@@ -9,40 +9,34 @@ interface Pokemon {
 }
 
 const PokemonList = () => {
-  const [nextPage, setNextPage] = useState("");
-  const [previousPage, setPreviousPage] = useState("");
-  const [activePage, setActivePage] = useState(Number(sessionStorage.getItem('last_page')) || 1);
+  const [activePage, setActivePage] = useState(
+    Number(sessionStorage.getItem("last_page")) || 1
+  );
   const [pagesCount, setPagesCount] = useState(0);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-  const retrievePokemons = async () => {
+  const retrievePokemons = useCallback(async () => {
     const response = await pokemonService.index(activePage);
-    const { next, results, count, previous } = response["data"];
-    setNextPage(next);
+    const { results, count } = response["data"];
     setPokemons(results);
-    setPreviousPage(previous);
     setPagesCount(count);
-  };
-
-  useEffect(() => {
-    retrievePokemons();
-  }, []);
-
-  useEffect(() => {
-    retrievePokemons();
   }, [activePage]);
 
+  useEffect(() => {
+    retrievePokemons();
+  }, [retrievePokemons]);
+
+  useEffect(() => {
+    retrievePokemons();
+  }, [activePage, retrievePokemons]);
+
   const handlePageChanged = (currentPage: number) => {
-    sessionStorage.setItem('last_page', currentPage.toString())
+    sessionStorage.setItem("last_page", currentPage.toString());
     setActivePage(currentPage);
   };
 
   const pokemonList = pokemons.map((pokemon) => (
-    <TileItem
-      key={pokemon.name}
-      name={pokemon.name}
-      url={pokemon.url}
-    />
+    <TileItem key={pokemon.name} name={pokemon.name} url={pokemon.url} />
   ));
 
   return (
