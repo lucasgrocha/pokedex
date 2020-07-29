@@ -1,13 +1,21 @@
 import React, { useState } from "react";
-import { InputGroup, FormControl } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleUserInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = evt.target.value.toLowerCase();
     setSearchTerm(formatted);
+  };
+
+  const search = () => {
+    if (searchTerm.length > 0) {
+      navigate(`/details/${searchTerm}`, { replace: false });
+      sessionStorage.removeItem("last_page");
+    }
   };
 
   return (
@@ -18,15 +26,10 @@ const Search = () => {
           value={searchTerm}
           placeholder="Pokemon's name or number"
           onChange={handleUserInput}
+          onKeyPress={(evt: any) => evt.key === "Enter" && search()}
         />
         <InputGroup.Append>
-          <Link
-            className="btn btn-primary"
-            to={`details/${searchTerm}`}
-            onClick={() => sessionStorage.removeItem("last_page")}
-          >
-            Search
-          </Link>
+          <Button onClick={search}>Search</Button>
         </InputGroup.Append>
       </InputGroup>
     </>
