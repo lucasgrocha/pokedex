@@ -11,7 +11,7 @@ interface Props {
 const CardItem: React.FC<Props> = (props) => {
   const [imageNotFound, setImageNotFound] = useState(false);
   return (
-    <Card>
+    <Card to={`details/${props.name}`}>
       {imageNotFound ? (
         <BrokenImage style={{ width: "120px" }} />
       ) : (
@@ -24,7 +24,6 @@ const CardItem: React.FC<Props> = (props) => {
         />
       )}
       <StyledName>{props.name}</StyledName>
-      <Link to={`details/${props.name}`}>Details</Link>
     </Card>
   );
 };
