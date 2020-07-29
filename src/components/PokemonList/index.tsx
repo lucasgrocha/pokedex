@@ -11,7 +11,7 @@ interface Pokemon {
 const PokemonList = () => {
   const [nextPage, setNextPage] = useState("");
   const [previousPage, setPreviousPage] = useState("");
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(Number(sessionStorage.getItem('last_page')) || 1);
   const [pagesCount, setPagesCount] = useState(0);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
@@ -33,6 +33,7 @@ const PokemonList = () => {
   }, [activePage]);
 
   const handlePageChanged = (currentPage: number) => {
+    sessionStorage.setItem('last_page', currentPage.toString())
     setActivePage(currentPage);
   };
 

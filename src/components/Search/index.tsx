@@ -6,7 +6,7 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleUserInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = evt.target.value.toLowerCase()
+    const formatted = evt.target.value.toLowerCase();
     setSearchTerm(formatted);
   };
 
@@ -20,7 +20,11 @@ const Search = () => {
           onChange={handleUserInput}
         />
         <InputGroup.Append>
-          <Link className="btn btn-primary" to={`details/${searchTerm}`}>
+          <Link
+            className="btn btn-primary"
+            to={`details/${searchTerm}`}
+            onClick={() => sessionStorage.removeItem("last_page")}
+          >
             Search
           </Link>
         </InputGroup.Append>
