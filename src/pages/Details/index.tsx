@@ -4,7 +4,8 @@ import { Table } from "react-bootstrap";
 import pokemonTypesSelector from "../../helpers/pokemonTypesSelector";
 import pokemonService from "../../services/pokemonService";
 import { useParams, Link } from "react-router-dom";
-import { DetailBox, PokemonImage, StarOutline, StarFilled } from "./styles";
+import { DetailBox, PokemonImage } from "./styles";
+import Favorite from '../../components/UI/Favorite'
 
 //   - Passos da Evolução // missing in api
 
@@ -45,7 +46,6 @@ const Details = () => {
   const [typeNames, setTypeNames] = useState<string[]>();
   const [filteredProperties, setFilteredProperties] = useState<Property>();
   const [notFound, setNotFound] = useState(false);
-  const [favored, setFavored] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -112,30 +112,6 @@ const Details = () => {
     }
   }, [id]);
 
-  const handleFavoredPokemon = () => {
-    const favorites: string[] = JSON.parse(
-      localStorage.getItem("favorites_pokemon") || "[]"
-    );
-    if (!favorites.includes(name)) {
-      localStorage.setItem(
-        "favorites_pokemon",
-        JSON.stringify([...favorites, name])
-      );
-      setFavored(true);
-    } else {
-      const newArr = [...favorites].filter((favorite) => favorite !== name);
-      localStorage.setItem("favorites_pokemon", JSON.stringify([...newArr]));
-      setFavored(false);
-    }
-  };
-
-  useEffect(() => {
-    const favorites: string[] = JSON.parse(
-      localStorage.getItem("favorites_pokemon") || "[]"
-    );
-    setFavored(favorites.includes(name));
-  }, [name]);
-
   const details = (
     <DetailBox>
       {!!id && (
@@ -152,11 +128,7 @@ const Details = () => {
             alt="Pokemon"
           />
           <h1 className="text-uppercase">{name}</h1>
-          {!favored ? (
-            <StarOutline onClick={handleFavoredPokemon} />
-          ) : (
-            <StarFilled onClick={handleFavoredPokemon} />
-          )}
+          <Favorite pokemonName={name} />
         </div>
       )}
       <Table striped bordered hover>
