@@ -117,7 +117,7 @@ const Details = () => {
       {!!id && (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <PokemonImage
-            src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
+            src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${name}.gif`}
             alt="Pokemon"
           />
         </div>

@@ -9,7 +9,7 @@ export const DetailBox = styled.div`
 `;
 
 export const PokemonImage = styled.img`
-  width: 200px;
+  width: 130px;
   padding-top: 20px;
   margin-bottom: 20px;
 `;

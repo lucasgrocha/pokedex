@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import pokemonService from "../../services/pokemonService";
-import TileItem from "../TileItem";
+import TileItem from "../CardItem";
 import Paginate from "../Paginate";
 
 interface Pokemon {
@@ -17,12 +17,11 @@ const PokemonList = () => {
 
   const retrievePokemons = async () => {
     const response = await pokemonService.index(activePage);
-    console.log(response.data);
     const { next, results, count, previous } = response["data"];
     setNextPage(next);
     setPokemons(results);
     setPreviousPage(previous);
-    setPagesCount(count); // 10 -> pagination offset
+    setPagesCount(count);
   };
 
   useEffect(() => {
@@ -38,12 +37,26 @@ const PokemonList = () => {
   };
 
   const pokemonList = pokemons.map((pokemon) => (
-    <TileItem key={pokemon.name} name={pokemon.name} url={pokemon.url} />
+    <TileItem
+      key={pokemon.name}
+      name={pokemon.name}
+      url={pokemon.url}
+    />
   ));
 
   return (
     <>
-      {pokemonList}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {pokemonList}
+      </div>
       <div
         style={{
           display: "flex",
