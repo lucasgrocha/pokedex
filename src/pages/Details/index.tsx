@@ -3,9 +3,8 @@ import api from "../../services/api";
 import { Table } from "react-bootstrap";
 import pokemonTypesSelector from "../../helpers/pokemonTypesSelector";
 import pokemonService from "../../services/pokemonService";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { DetailBox, PokemonImage } from "./styles";
+import { useParams, Link } from "react-router-dom";
+import { DetailBox, PokemonImage, StarOutline, StarFilled } from "./styles";
 
 //   - Passos da Evolução // missing in api
 
@@ -37,7 +36,7 @@ const Details = () => {
   const [pokemonData, setPokemonData] = useState<any>();
   const [imageURL, setImageURL] = useState("");
   const [height, setHeight] = useState(0);
-  const [name, setName] = useState(0);
+  const [name, setName] = useState("");
   const [id, setId] = useState<number>();
   const [stats, setStats] = useState<object[]>([]);
   const [types, setTypes] = useState<object[]>();
@@ -46,6 +45,7 @@ const Details = () => {
   const [typeNames, setTypeNames] = useState<string[]>();
   const [filteredProperties, setFilteredProperties] = useState<Property>();
   const [notFound, setNotFound] = useState(false);
+  const [favored, setFavored] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -112,17 +112,53 @@ const Details = () => {
     }
   }, [id]);
 
+  const handleFavoredPokemon = () => {
+    const favorites: string[] = JSON.parse(
+      localStorage.getItem("favorites_pokemon") || "[]"
+    );
+    if (!favorites.includes(name)) {
+      localStorage.setItem(
+        "favorites_pokemon",
+        JSON.stringify([...favorites, name])
+      );
+      setFavored(true);
+    } else {
+      const newArr = [...favorites].filter((favorite) => favorite !== name);
+      localStorage.setItem("favorites_pokemon", JSON.stringify([...newArr]));
+      setFavored(false);
+    }
+  };
+
+  useEffect(() => {
+    const favorites: string[] = JSON.parse(
+      localStorage.getItem("favorites_pokemon") || "[]"
+    );
+    setFavored(favorites.includes(name));
+  }, [name]);
+
   const details = (
     <DetailBox>
       {!!id && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <PokemonImage
             src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${name}.gif`}
             alt="Pokemon"
           />
+          <h1 className="text-uppercase">{name}</h1>
+          {!favored ? (
+            <StarOutline onClick={handleFavoredPokemon} />
+          ) : (
+            <StarFilled onClick={handleFavoredPokemon} />
+          )}
         </div>
       )}
-      <h1 className="text-center text-uppercase">{name}</h1>
       <Table striped bordered hover>
         <tbody className="text-center">
           <tr>
