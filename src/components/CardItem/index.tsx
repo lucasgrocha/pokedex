@@ -5,13 +5,13 @@ import { BrokenImage } from "@styled-icons/material-outlined";
 
 interface Props {
   name: string;
-  url: string;
+  url?: string;
 }
 
 const CardItem: React.FC<Props> = (props) => {
   const [imageNotFound, setImageNotFound] = useState(false);
   return (
-    <Card to={`details/${props.name}`}>
+    <Card to={`/details/${props.name}`}>
       {imageNotFound ? (
         <BrokenImage style={{ width: "120px" }} />
       ) : (
