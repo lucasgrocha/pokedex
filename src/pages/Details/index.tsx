@@ -5,7 +5,8 @@ import pokemonTypesSelector from "../../helpers/pokemonTypesSelector";
 import pokemonService from "../../services/pokemonService";
 import { useParams, Link } from "react-router-dom";
 import { DetailBox, PokemonImage } from "./styles";
-import Favorite from '../../components/UI/Favorite'
+import Favorite from "../../components/UI/Favorite";
+import retrievePokemonEvolutions from "../../helpers/retrievePokemonEvolutions";
 
 //   - Passos da Evolução // missing in api
 
@@ -46,6 +47,7 @@ const Details = () => {
   const [typeNames, setTypeNames] = useState<string[]>();
   const [filteredProperties, setFilteredProperties] = useState<Property>();
   const [notFound, setNotFound] = useState(false);
+  const [evolutions, setEvolutions] = useState<{}[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -59,7 +61,7 @@ const Details = () => {
         setLoading(false);
         setNotFound(true);
       });
-  }, []);
+  }, [searchTerm]);
 
   useEffect(() => {
     if (!!pokemonData) {
@@ -97,9 +99,8 @@ const Details = () => {
 
   useEffect(() => {
     if (!!evolutionURL) {
-      api.get(evolutionURL).then((response) => {
-        const evolutions = response.data.chain;
-        console.log(evolutions);
+      retrievePokemonEvolutions(evolutionURL).then((data) => {
+        setEvolutions(data);
       });
     }
   }, [evolutionURL]);
@@ -111,6 +112,10 @@ const Details = () => {
       });
     }
   }, [id]);
+
+  useEffect(() => {
+    console.log(evolutions);
+  }, [evolutions]);
 
   const details = (
     <DetailBox>
