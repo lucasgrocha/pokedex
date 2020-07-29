@@ -5,7 +5,9 @@ export const DetailBox = styled.div`
   background-color: #f2f2f2;
   border-radius: 10px;
   height: 100%;
+  overflow: hidden;
   width: 100%;
+  margin-bottom: 20px;
 `;
 
 export const PokemonImage = styled.img`
