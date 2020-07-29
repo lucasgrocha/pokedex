@@ -7,8 +7,7 @@ import { useParams, Link } from "react-router-dom";
 import { DetailBox, PokemonImage } from "./styles";
 import Favorite from "../../components/UI/Favorite";
 import retrievePokemonEvolutions from "../../helpers/retrievePokemonEvolutions";
-
-//   - Passos da Evolução // missing in api
+import PokemonEvolutions from "../../components/PokemonEvolutions";
 
 interface Property {
   hp: {
@@ -79,7 +78,7 @@ const Details = () => {
   useEffect(() => {
     if (!!stats) {
       let filtered = {} as Property;
-      console.log(stats);
+      // console.log(stats);
       const propertiesObj = stats
         .filter((stat: any) => {
           return ["hp", "attack", "defense", "speed"].includes(stat.stat.name);
@@ -93,7 +92,7 @@ const Details = () => {
         filtered = { ...filtered, ...property };
       }
       setFilteredProperties(filtered);
-      console.log(filtered);
+      // console.log(filtered);
     }
   }, [stats]);
 
@@ -114,67 +113,73 @@ const Details = () => {
   }, [id]);
 
   useEffect(() => {
-    console.log(evolutions);
+    // console.log(evolutions);
   }, [evolutions]);
 
   const details = (
-    <DetailBox>
-      {!!id && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <PokemonImage
-            src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${name}.gif`}
-            alt="Pokemon"
-          />
-          <h1 className="text-uppercase">{name}</h1>
-          <Favorite pokemonName={name} />
-        </div>
-      )}
-      <Table striped bordered hover>
-        <tbody className="text-center">
-          <tr>
-            <td>id</td>
-            <td>{id}</td>
-          </tr>
-          <tr>
-            <td>Height</td>
-            <td>{height / 10}</td>
-          </tr>
-          {filteredProperties && Object.keys(filteredProperties).length !== 0 && (
-            <>
-              <tr>
-                <td>HP</td>
-                <td>{filteredProperties.hp.base_stat}</td>
-              </tr>
-              <tr>
-                <td>Speed</td>
-                <td>{filteredProperties.speed.base_stat}</td>
-              </tr>
-              <tr>
-                <td>Attack</td>
-                <td>{filteredProperties.attack.base_stat}</td>
-              </tr>
-              <tr>
-                <td>Defense</td>
-                <td>{filteredProperties.defense.base_stat}</td>
-              </tr>
-              <tr>
-                <td>Types</td>
-                <td>
-                  <strong>{typeNames?.join(" | ")}</strong>
-                </td>
-              </tr>
-            </>
-          )}
-        </tbody>
-      </Table>
-    </DetailBox>
+    <>
+      <DetailBox>
+        {!!id && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <PokemonImage
+              src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${name}.gif`}
+              alt="Pokemon"
+            />
+            <h1 className="text-uppercase">{name}</h1>
+            <Favorite pokemonName={name} />
+          </div>
+        )}
+        <Table striped bordered hover>
+          <tbody className="text-center">
+            <tr>
+              <td>id</td>
+              <td>{id}</td>
+            </tr>
+            <tr>
+              <td>Height</td>
+              <td>{height / 10}</td>
+            </tr>
+            {filteredProperties &&
+              Object.keys(filteredProperties).length !== 0 && (
+                <>
+                  <tr>
+                    <td>HP</td>
+                    <td>{filteredProperties.hp.base_stat}</td>
+                  </tr>
+                  <tr>
+                    <td>Speed</td>
+                    <td>{filteredProperties.speed.base_stat}</td>
+                  </tr>
+                  <tr>
+                    <td>Attack</td>
+                    <td>{filteredProperties.attack.base_stat}</td>
+                  </tr>
+                  <tr>
+                    <td>Defense</td>
+                    <td>{filteredProperties.defense.base_stat}</td>
+                  </tr>
+                  <tr>
+                    <td>Types</td>
+                    <td>
+                      <strong>{typeNames?.join(" | ")}</strong>
+                    </td>
+                  </tr>
+                </>
+              )}
+          </tbody>
+        </Table>
+      </DetailBox>
+      <div>
+        {evolutions.length > 0 && <PokemonEvolutions evolutions={evolutions} />}
+      </div>
+    </>
   );
 
   if (notFound) {

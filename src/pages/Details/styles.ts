@@ -4,8 +4,8 @@ export const DetailBox = styled.div`
   margin: auto;
   background-color: #f2f2f2;
   border-radius: 10px;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 `;
 
 export const PokemonImage = styled.img`
