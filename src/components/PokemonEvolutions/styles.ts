@@ -25,7 +25,8 @@ export const Box = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    height: 160px;
+    min-height: 160px;
+    max-height: 200px;
   }
 `;
 
