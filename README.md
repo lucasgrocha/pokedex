@@ -1,6 +1,6 @@
 ## Pokedex
 
-... Description
+This application is an awesome Pokedex, you can search for pokemons, you can learn about its details, e.g: attack and defense power, discover its types, its speed and more, as well as see all evolutions from base to last evolution and add to favorites a pokemon that you want to catch to become bigger than Ash Ketchum. 🤟
 
 
 ## Technology 
