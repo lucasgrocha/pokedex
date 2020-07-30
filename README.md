@@ -28,6 +28,23 @@ Here are the technologies used in this project.
 * To run the project:
 >    $ yarn start
 
+## Features
+- I used @media queries and flexbox to make a responsive layout
+  - The navbar has two differents views depending the size of screen
+  - The evolutions of pokemon is horizontal when large screen and vertical on a small screen
+  - The cards of each pokemon is responsive for large and small screens
+  
+- To favorite a pokemon, the application saves the favored pokemon in the localStorage of browser.
+  - If the pokemon is already favored, then It get removed
+
+- When using pagination, the application uses sessionStorage to save the current page, e.g: you are in the page 5 and open the pikachu details, when you go back to Home page, the pagination are open in the page 5 instead of page 1.
+  - The data only get downloaded from API according the changing page
+  - When the page changes a new request is made
+
+- The search only let the searching if the input is filled
+  - You can search by writting the pokemon's name or its number
+  - To search you can press Enter key or clicking on the button
+
 ## How to use
 
 ### Home Page
@@ -49,7 +66,6 @@ Here are the technologies used in this project.
 ### PWA install
 
 ![PWA intall](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/pwa.png)
-
 
 
 
