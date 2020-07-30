@@ -36,10 +36,11 @@ Here are the technologies used in this project.
   - The evolutions of pokemon is horizontal when large screen and vertical on a small screen
   - The cards of each pokemon is responsive for large and small screens
   
-- To favorite a pokemon, the application saves the favored pokemon in the localStorage of browser.
+- To favorite a pokemon, you should click in the star icon below the pokemon picture in details page
   - If the pokemon is already favored, then It get removed
+  - The application saves the favored pokemon in the localStorage of browser
 
-- When using pagination, the application uses sessionStorage to save the current page, e.g: you are in the page 5 and open the pikachu details, when you go back to Home page, the pagination are open in the page 5 instead of page 1.
+- When using pagination, the application uses sessionStorage to save the current page, e.g: you are in the page 5 and open the pikachu details, when you go back to Home page, the pagination are open in the page 5 instead of page 1
   - The data only get downloaded from API according the changing page
   - When the page changes a new request is made
 
