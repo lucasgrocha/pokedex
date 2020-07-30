@@ -51,23 +51,23 @@ Here are the technologies used in this project.
 
 ### Home Page
 
-![Home page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/home.png)
+![Home page](https://raw.githubusercontent.com/lucasgrocha/pokedex/master/public/readmeImages/home.png)
 
 ### Details Page
 
-![Details page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/details.png)<br />
+![Details page](https://raw.githubusercontent.com/lucasgrocha/pokedex/master/public/readmeImages/details.png)<br />
 
 ### Favorites Page
 
-![Favorites page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/favorites.png)
+![Favorites page](https://raw.githubusercontent.com/lucasgrocha/pokedex/master/public/readmeImages/favorites.png)
 
 ### Not found Page
 
-![Not found page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/notFoundPokemon.png)
+![Not found page](https://raw.githubusercontent.com/lucasgrocha/pokedex/master/public/readmeImages/notFoundPokemon.png)
 
 ### PWA install
 
-![PWA intall](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/pwa.png)
+![PWA intall](https://raw.githubusercontent.com/lucasgrocha/pokedex/master/public/readmeImages/pwa.png)
 
 
 
