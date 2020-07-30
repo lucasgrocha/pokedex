@@ -3,11 +3,12 @@ import api from "../../services/api";
 import { Table } from "react-bootstrap";
 import pokemonTypesSelector from "../../helpers/pokemonTypesSelector";
 import pokemonService from "../../services/pokemonService";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DetailBox, PokemonImage } from "./styles";
 import Favorite from "../../components/UI/Favorite";
 import retrievePokemonEvolutions from "../../helpers/retrievePokemonEvolutions";
 import PokemonEvolutions from "../../components/PokemonEvolutions";
+import NotFound from "../NotFound";
 
 interface Property {
   hp: {
@@ -181,8 +182,7 @@ const Details = () => {
   if (notFound) {
     return (
       <>
-        <p>Not found</p>
-        <Link to="/">Home</Link>
+        <NotFound />
       </>
     );
   }
