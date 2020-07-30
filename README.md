@@ -30,6 +30,20 @@ Here are the technologies used in this project.
 
 ## How to use
 
+### Home Page
+
+![Home page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/home.png)
+
+![Details page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/details.png)
+
+![Favorites page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/favorites.png)
+
+![Not found page](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/notFoundPokemon.png)
+
+![PWA intall](https://raw.githubusercontent.com/lucasgrocha/pokedex/documentation/public/readmeImages/pwa.png)
+
+
+
 
 
 ## Links
