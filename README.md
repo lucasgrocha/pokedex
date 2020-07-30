@@ -12,7 +12,14 @@ Here are the technologies used in this project.
 
 
 ## Javascript libs
-...
+
+* axios
+* react-router-dom
+* react-bootstrap
+* styled-components
+* styled-icons
+* react-js-pagination
+
 
 ## Getting started
 
@@ -27,8 +34,8 @@ Here will be the images and descriptions. Principal content.
 
 ## Links
 
-  - Link of deployed application: https://musing-swartz-7c8aef.netlify.app/
-  - Repository: https://github.com/lucasgrocha/pokedex
+- Link of deployed application: https://musing-swartz-7c8aef.netlify.app/
+- Repository: https://github.com/lucasgrocha/pokedex
 
 
 ## Author
