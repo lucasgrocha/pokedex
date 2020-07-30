@@ -30,7 +30,7 @@ Here are the technologies used in this project.
 
 ## How to use
 
-Here will be the images and descriptions. Principal content.
+
 
 ## Links
 
