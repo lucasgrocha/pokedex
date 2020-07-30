@@ -23,9 +23,11 @@ Here are the technologies used in this project.
 
 ## Getting started
 
-* To install libs:
+* Download project
+>    $ git clone https://github.com/lucasgrocha/pokedex.git
+* Install the libs:
 >    $ yarn install
-* To run the project:
+* Run the project:
 >    $ yarn start
 
 ## Features
