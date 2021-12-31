@@ -5,7 +5,7 @@ const pokemonService = {
     api.get("/pokemon", {
       params: { offset: (activePage - 1) * 10, limit: 10 },
     }),
-  show: (searchTerm: string) => (
+  show: (searchTerm: string | undefined) => (
     api.get(`/pokemon/${searchTerm}`)
   )
 };
